@@ -1,0 +1,11 @@
+Olá, %(nome)s
+
+Tem interese em comprar %(produtos)s?
+
+Este produto é ótimo para resolver o problema de %(texto)s.
+
+Clique agora em %(link)s
+
+Apneas %(quantidade)s unidades restantes!
+
+Preço promoção: %(preco).2f

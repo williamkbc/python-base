@@ -25,9 +25,32 @@ __license__ = "Unlicense"
 # Dunder signifies "double underscore" e é usado para denotar métodos especiais em Python.
 
 import os
+import sys
 
 
-current_language = os.getenv("LANG")[:5] # Obtém a variável de ambiente LANG do sistema
+arguments = {
+    "lang": None,
+    "count": 1,
+}
+
+for arg in sys.argv[1:]:
+    key, value = arg.split("=")
+    key = key.lstrip("-").strip()
+    value = value.strip()
+    if key not in arguments:
+        print(f"Invalid Option `{key}`")
+        sys.exit()
+    arguments[key] = value
+
+current_language = arguments["lang"]
+if current_language is None:
+    current_language = os.getenv("lang")
+    if current_language is None:
+        current_language = input(
+            "Enter the language code (e.g., en_US, pt_BR:"
+        )
+
+current_language = current_language[:5]
 
 # sets (Hash Table) - O(1) - Constante
 # dicts (Hash Table) - O(1) - Constante
@@ -80,4 +103,6 @@ msg = {
 
 # Exibe a mensagem de saudação na língua configurada
 # O(1) - Constante
-print(msg[current_language])
+print(
+    msg[current_language] * int(arguments["count"])
+    )

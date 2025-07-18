@@ -25,9 +25,6 @@ atividades = [
 for nome_atividade, atividade in atividades:
 
 
-
-
-
     print(f"Alunos da Atividade: {nome_atividade}\n")
     print("-" * 40)
 
