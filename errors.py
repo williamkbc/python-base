@@ -3,19 +3,23 @@
 import os
 import sys
 
-# LBYL  - Look Before You Leap
-if os.path.exists("names.txt"):
-    print("O arquivo existe") 
-    input("...") # Race condition to wait for user input
+# EAFP - Easier to Ask Forgiveness than Permission
+# (É mais fácil pedir perdão do que permissão)
+
+try:  
     names = open("names.txt").readlines()
+    # FileNotFoundError
+except FileNotFoundError as e:
+    print(f"{str(e)}.")
+    sys.exit(1) 
+    # TODO: usar retry
 else:
-    print("[Error]: The file 'names.txt' does not exist.")
-    sys.exit(1)
+    print("File opened successfully.")
+finally:
+    print("This will always execute, regardless of success or failure.")
 
-
-if len(names) >= 3:
+try:
     print(names[2])
-else:
+except:
     print("[Error]:There are not enough names in the list.")
     sys.exit(1)
-# EAFP - Easier to Ask Forgiveness than Permission
